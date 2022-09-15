@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">DiceRoller1</string>
+    <string name="app_name">Dice Roller 1</string>
+
+    <string name="roll_button_label">Roll Dice</string>
+    <string name="roll_the_dice">Roll The Dice</string>
+    <string name="reset_button_label">Reset</string>
+    <string name="blank">&#160;</string>
+    <string name="total_label">Total:</string>
+
 </resources>
