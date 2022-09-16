@@ -2,6 +2,9 @@ package ca.tetervak.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.viewModels
 import ca.tetervak.diceroller.databinding.ActivityMainBinding
 import ca.tetervak.diceroller.model.RollData
@@ -27,12 +30,66 @@ class MainActivity : AppCompatActivity() {
         }
 
         mainViewModel.rollData.observe(this){ data ->
-            updateViews(data)
+            if(data == null){
+                hideOutputs()
+            } else {
+                showOutputs()
+                updateOutputs(data)
+            }
         }
 
     }
 
-    private fun updateViews(data: RollData?) {
+    private fun hideOutputs(){
+        with(binding){
+            dieImagesRow.visibility = View.INVISIBLE
+            dieValuesRow.visibility = View.INVISIBLE
+            totalRow.visibility = View.INVISIBLE
+        }
+    }
 
+    private fun showOutputs(){
+        with(binding){
+            dieImagesRow.visibility = View.VISIBLE
+            dieValuesRow.visibility = View.VISIBLE
+            totalRow.visibility = View.VISIBLE
+        }
+    }
+
+    private fun updateOutputs(data: RollData) {
+        with(data) {
+            with(binding) {
+                updateDieImageOutput(die0ImageView, values[0])
+                updateDieImageOutput(die1ImageView, values[1])
+                updateDieImageOutput(die2ImageView, values[2])
+
+                updateDieValueOutput(die0TextView, values[0])
+                updateDieValueOutput(die1TextView, values[1])
+                updateDieValueOutput(die2TextView, values[2])
+
+                updateTotalValueOutput(total)
+            }
+        }
+    }
+
+    private fun updateDieImageOutput(imageView: ImageView, value: Int){
+        with(imageView) {
+            when (value) {
+                1 -> setImageResource(R.drawable.dice_1)
+                2 -> setImageResource(R.drawable.dice_2)
+                3 -> setImageResource(R.drawable.dice_3)
+                4 -> setImageResource(R.drawable.dice_4)
+                5 -> setImageResource(R.drawable.dice_5)
+                6 -> setImageResource(R.drawable.dice_6)
+            }
+        }
+    }
+
+    private fun updateDieValueOutput(textView: TextView, value: Int){
+        textView.text = value.toString()
+    }
+
+    private fun updateTotalValueOutput(total: Int){
+        binding.totalValueTextView.text = total.toString()
     }
 }
