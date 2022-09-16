@@ -57,18 +57,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateOutputs(data: RollData) {
-        with(data) {
-            with(binding) {
-                updateDieImageOutput(die0ImageView, values[0])
-                updateDieImageOutput(die1ImageView, values[1])
-                updateDieImageOutput(die2ImageView, values[2])
+        with(binding) {
+            updateDieImageOutput(die0ImageView, data.values[0])
+            updateDieImageOutput(die1ImageView, data.values[1])
+            updateDieImageOutput(die2ImageView, data.values[2])
 
-                updateDieValueOutput(die0TextView, values[0])
-                updateDieValueOutput(die1TextView, values[1])
-                updateDieValueOutput(die2TextView, values[2])
+            updateDieValueOutput(die0TextView, data.values[0])
+            updateDieValueOutput(die1TextView, data.values[1])
+            updateDieValueOutput(die2TextView, data.values[2])
 
-                updateTotalValueOutput(total)
-            }
+            updateTotalValueOutput(data.total)
         }
     }
 
