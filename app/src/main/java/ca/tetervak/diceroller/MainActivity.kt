@@ -25,12 +25,12 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.reset()
         }
 
-        mainViewModel.liveRollData.observe(this){ data ->
-            if(data == null){
+        mainViewModel.liveRollData.observe(this){ rollData ->
+            if(rollData == null){
                 hideOutputs()
             } else {
                 showOutputs()
-                updateOutputs(data)
+                updateOutputs(rollData)
             }
         }
     }
