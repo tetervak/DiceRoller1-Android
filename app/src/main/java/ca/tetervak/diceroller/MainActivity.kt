@@ -12,12 +12,10 @@ import ca.tetervak.diceroller.model.RollData
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-        val mainViewModel: MainViewModel by viewModels()
 
         binding.rollButton.setOnClickListener {
             mainViewModel.roll()
@@ -35,7 +33,6 @@ class MainActivity : AppCompatActivity() {
                 updateOutputs(data)
             }
         }
-
     }
 
     private fun hideOutputs(){
