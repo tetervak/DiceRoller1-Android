@@ -15,9 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+
 
         val mainViewModel: MainViewModel by viewModels()
 
@@ -29,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.reset()
         }
 
-        mainViewModel.rollData.observe(this){ data ->
+        mainViewModel.liveRollData.observe(this){ data ->
             if(data == null){
                 hideOutputs()
             } else {
