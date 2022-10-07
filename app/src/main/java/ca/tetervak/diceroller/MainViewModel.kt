@@ -5,8 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ca.tetervak.diceroller.model.DiceGame
 import ca.tetervak.diceroller.model.RollData
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel: ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val game: DiceGame
+): ViewModel() {
 
     private val _liveRollData = MutableLiveData<RollData?>()
     val liveRollData: LiveData<RollData?> = _liveRollData
@@ -20,8 +25,4 @@ class MainViewModel: ViewModel() {
         game.reset()
         _liveRollData.value = null
     }
-
-    // in a perfect app, this should be in the data layer
-    private val game = DiceGame(numberOfDice = 3)
-
 }

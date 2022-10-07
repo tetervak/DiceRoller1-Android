@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import ca.tetervak.diceroller.databinding.ActivityMainBinding
 import ca.tetervak.diceroller.model.RollData
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

@@ -4,6 +4,10 @@ plugins {
 
     //Needed for JUnit5 testing
     id "de.mannodermaus.android-junit5"
+
+    // Needed by Hilt (dependency injection)
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -65,4 +69,12 @@ dependencies {
     testImplementation "junit:junit:4.13.2"
     testRuntimeOnly "org.junit.vintage:junit-vintage-engine:5.9.0"
 
+    // Needed by Hilt (dependency injection)
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+}
+
+// Allow references to generated code (for Hilt)
+kapt {
+    correctErrorTypes true
 }
