@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import ca.tetervak.diceroller.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

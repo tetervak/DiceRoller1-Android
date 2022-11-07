@@ -8,6 +8,9 @@ import ca.tetervak.diceroller.model.RollData
 
 class MainViewModel: ViewModel() {
 
+    // in a perfect app, this game object should be in the data layer
+    private val game = DiceGame(numberOfDice = 3)
+
     private val _liveRollData = MutableLiveData<RollData?>(game.rollData)
     val liveRollData: LiveData<RollData?> = _liveRollData
 
@@ -20,8 +23,4 @@ class MainViewModel: ViewModel() {
         game.reset()
         _liveRollData.value = game.rollData
     }
-
-    // in a perfect app, this should be in the data layer
-    private val game = DiceGame(numberOfDice = 3)
-
 }
