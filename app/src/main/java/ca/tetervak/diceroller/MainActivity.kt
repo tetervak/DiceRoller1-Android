@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import ca.tetervak.diceroller.databinding.ActivityMainBinding
-import ca.tetervak.diceroller.model.RollData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,45 +32,58 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.liveRollData.observe(this){ rollData ->
             if(rollData == null){
-                hideOutputs()
+                hideDiceRows()
+                hideResetButton()
             } else {
-                showOutputs()
-                updateOutputs(rollData)
+                showDiceRows()
+                val list = rollData.values
+                updateDiceImageRow(list)
+                updateDiceValueRow(list)
+                showResetButton()
             }
+            updateTotal(rollData?.total ?: 0)
         }
     }
 
-    private fun hideOutputs(){
+    private fun showResetButton() {
+        binding.resetButton.visibility = View.VISIBLE
+    }
+
+    private fun hideResetButton() {
+        binding.resetButton.visibility = View.GONE
+    }
+
+    private fun hideDiceRows(){
         with(binding){
-            dieImagesRow.visibility = View.INVISIBLE
-            dieValuesRow.visibility = View.INVISIBLE
-            totalRow.visibility = View.INVISIBLE
+            dieImagesRow.visibility = View.GONE
+            dieValuesRow.visibility = View.GONE
         }
     }
 
-    private fun showOutputs(){
+    private fun showDiceRows(){
         with(binding){
             dieImagesRow.visibility = View.VISIBLE
             dieValuesRow.visibility = View.VISIBLE
-            totalRow.visibility = View.VISIBLE
         }
     }
 
-    private fun updateOutputs(rollData: RollData) {
+    private fun updateDiceValueRow(list: List<Int>) {
         with(binding) {
-            updateDieImageOutput(die0ImageView, rollData.values[0])
-            updateDieImageOutput(die1ImageView, rollData.values[1])
-            updateDieImageOutput(die2ImageView, rollData.values[2])
-
-            updateDieValueOutput(die0TextView, rollData.values[0])
-            updateDieValueOutput(die1TextView, rollData.values[1])
-            updateDieValueOutput(die2TextView, rollData.values[2])
-
-            updateTotalValueOutput(rollData.total)
+            updateDieValue(die0TextView, list[0])
+            updateDieValue(die1TextView, list[1])
+            updateDieValue(die2TextView, list[2])
         }
     }
 
-    private fun updateDieImageOutput(imageView: ImageView, value: Int){
+    private fun updateDiceImageRow(list: List<Int>) {
+        with(binding) {
+            updateDieImage(die0ImageView, list[0])
+            updateDieImage(die1ImageView, list[1])
+            updateDieImage(die2ImageView, list[2])
+        }
+    }
+
+    private fun updateDieImage(imageView: ImageView, value: Int){
         with(imageView) {
             when (value) {
                 1 -> setImageResource(R.drawable.dice_1)
@@ -84,11 +96,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateDieValueOutput(textView: TextView, value: Int){
+    private fun updateDieValue(textView: TextView, value: Int){
         textView.text = value.toString()
     }
 
-    private fun updateTotalValueOutput(total: Int){
+    private fun updateTotal(total: Int){
         binding.totalValueTextView.text = total.toString()
     }
 }

@@ -13,7 +13,7 @@ class MainViewModel @Inject constructor(
     private val game: DiceGame
 ): ViewModel() {
 
-    private val _liveRollData = MutableLiveData<RollData?>()
+    private val _liveRollData = MutableLiveData<RollData?>(game.rollData)
     val liveRollData: LiveData<RollData?> = _liveRollData
 
     fun roll() {
@@ -23,6 +23,6 @@ class MainViewModel @Inject constructor(
 
     fun reset() {
         game.reset()
-        _liveRollData.value = null
+        _liveRollData.value = game.rollData
     }
 }

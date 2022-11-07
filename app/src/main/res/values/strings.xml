@@ -7,5 +7,6 @@
     <string name="blank">&#160;</string>
     <string name="total_label">Total:</string>
     <string name="dice_image">dice image</string>
+    <string name="zero">0</string>
 
 </resources>
